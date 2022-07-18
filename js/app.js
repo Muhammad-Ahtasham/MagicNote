@@ -48,7 +48,7 @@ function showNotes() {
 
 // deleting note functions and code here
 function deleteNote(index){
-    console.log("deleting", index)
+    // console.log("deleting", index)
     let notes = localStorage.getItem('notes');
     if (notes == null) {
         notesObj = []
@@ -62,3 +62,20 @@ function deleteNote(index){
     localStorage.setItem('notes', JSON.stringify(notesObj));
     showNotes();
 }
+
+// search bar functions
+let search = document.getElementById('searchTxt');
+search.addEventListener('input', function(){
+    let inputVal = search.value.toLowerCase();
+    // console.log('input ecent fired', inputVal);
+    let noteCard = document.getElementsByClassName('noteCard');
+    Array.from(noteCard).forEach(function(element){
+        let cardTxt = element.getElementsByTagName('p')[0].innerText;
+        if(cardTxt.includes(inputVal)){
+            element.style.display = 'block';
+        }
+        else{
+            element.style.display = 'none';
+        }
+    });
+});
